@@ -47,4 +47,30 @@ class smokestack::libvirt (
     notify => Service['libvirtd']
   }
 
+  file { '/usr/share/augeas/lenses/libvirtnetwork.aug':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => 644,
+    source  => 'puppet:///modules/smokestack/libvirtnetwork.aug'
+  }
+
+  exec { "recreate network":
+    command     => "virsh net-destroy default && virsh net-create /etc/libvirt/qemu/networks/default.xml",
+    path => "/bin",
+    refreshonly => true,
+    user     => 'root'
+  }
+
+  augeas{"libvirt_network_default_xml":
+    context   => "/files/etc/libvirt/qemu/networks/default.xml/",
+    changes   => [
+        "set network/ip/#attribute/address 192.168.129.1",
+        "set network/ip/dhcp/range/#attribute/start 192.168.129.2",
+        "set network/ip/dhcp/range/#attribute/end 192.168.129.254",
+      ],
+    require => File["/usr/share/augeas/lenses/libvirtnetwork.aug"],
+    notify => Exec["recreate network"]
+  }
+
 }
