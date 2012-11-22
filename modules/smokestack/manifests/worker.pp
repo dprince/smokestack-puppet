@@ -4,17 +4,16 @@
 #
 class smokestack::worker (
   $username='smokestack',
-  $home_dir='/home/smokestack',
-  $installation_dir='/var/lib/libvirt/images/'
+  $home_dir='/home/smokestack'
 ) {
 
   # base packages required by all SmokeStack workers
   package { ['rubygems',
-             'ruby-devel',
+              'ruby-devel',
+              'rubygem-bundler',
               'gcc',
               'gcc-c++',
               'git',
-              'rubygem-bundler',
               'monit',
               'mysql-devel',
               'ntp']:

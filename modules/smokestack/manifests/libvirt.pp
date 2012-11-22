@@ -5,7 +5,7 @@
 class smokestack::libvirt (
   $username='smokestack',
   $images_dir='/var/lib/libvirt/images/'
-) {
+) inherits smokestack::worker {
 
   package { ['libvirt', 'qemu-kvm', 'virt-manager', 'libguestfs-tools-c']:
     ensure => 'present'
