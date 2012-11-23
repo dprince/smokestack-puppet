@@ -1,0 +1,13 @@
+#collectd config file for Librato Metrics 
+<LoadPlugin "python">
+  Globals true
+</LoadPlugin>
+
+<Plugin "python">
+  ModulePath "/opt/collectd-librato"
+  Import "collectd-librato"
+  <Module "collectd-librato">
+    APIToken "<%= librato_api_token %>"
+    Email "<%= librato_email %>"
+  </Module>
+</Plugin>
