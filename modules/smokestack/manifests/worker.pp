@@ -1,7 +1,6 @@
 #
 # Base SmokeStack worker configuration
 #
-#
 class smokestack::worker (
   $username='smokestack',
   $home_dir='/home/smokestack'
@@ -33,8 +32,8 @@ class smokestack::worker (
   file { $home_dir:
     ensure  => directory,
     mode    => '700',
-    owner   => 'smokestack',
-    group   => 'smokestack',
+    owner   => $username,
+    group   => $username,
     require => User['smokestack']
   }
 
@@ -43,11 +42,14 @@ class smokestack::worker (
           '/u/apps/',
           '/u/apps/SmokeStack/',
           '/u/apps/SmokeStack/releases',
-          '/u/apps/SmokeStack/shared']:
+          '/u/apps/SmokeStack/shared',
+          '/u/apps/SmokeStack/shared/log',
+          '/u/apps/SmokeStack/shared/pids']:
     ensure  => directory,
     mode    => '775',
-    owner   => 'smokestack',
-    group   => 'smokestack',
+    recurse => true,
+    owner   => $username,
+    group   => $username,
     require => User['smokestack']
   }
 

@@ -1,10 +1,7 @@
 #
-# Base SmokeStack worker configuration
-#
+# SmokeStack unit test worker
 #
 class smokestack::unit (
-  $username='smokestack',
-  $home_dir='/home/smokestack'
 ) inherits smokestack::worker {
 
   # packages required to run unit tests
@@ -18,6 +15,15 @@ class smokestack::unit (
               'openldap-devel',
               ]:
     ensure => 'present'
+  }
+
+  file { "/etc/monit.d/unit_worker":
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => 640,
+    content => template('smokestack/unit_worker.monit.erb'),
+    require => Package['monit'],
   }
 
 }
