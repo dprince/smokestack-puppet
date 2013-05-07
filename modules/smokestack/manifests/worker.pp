@@ -8,6 +8,9 @@ class smokestack::worker (
 
   # base packages required by all SmokeStack workers
   package { ['rubygems',
+              'libxslt-devel',
+              'libxml2-devel',
+              'libxml-devel',
               'ruby-devel',
               'rubygem-bundler',
               'gcc',

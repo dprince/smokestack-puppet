@@ -1,11 +1,10 @@
 #
 # Configure libvirt for use on a SmokeStack worker
 #
-#
 class smokestack::libvirt (
   $username='smokestack',
   $images_dir='/var/lib/libvirt/images/'
-) inherits smokestack::worker {
+) {
 
   package { ['libvirt', 'qemu-kvm', 'virt-manager', 'libguestfs-tools-c']:
     ensure => 'present'
@@ -29,11 +28,10 @@ class smokestack::libvirt (
     require => [Group['libvirt'], Package["libvirt"]]
   }
 
-  exec { "/sbin/usermod -G libvirt -a smokestack":
-    onlyif => "groups smokestack | grep -v libvirt",
+  exec { "/sbin/usermod -G libvirt -a $username":
+    onlyif => "groups $username | grep -v libvirt",
     require => Group['libvirt'],
     path    => "/usr/bin"
-
   }
 
   augeas{"libvirtd_conf":
