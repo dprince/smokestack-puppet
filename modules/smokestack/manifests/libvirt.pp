@@ -17,7 +17,8 @@ class smokestack::libvirt (
   }
 
   group { 'libvirt':
-    ensure => present
+    ensure => present,
+    require => Package['libvirt']
   }
 
   file { $images_dir:
@@ -42,6 +43,7 @@ class smokestack::libvirt (
         "set auth_unix_ro none",
         "set auth_unix_rw none",
       ],
+    require => [Package['libvirt'], Service['libvirtd']],
     notify => Service['libvirtd']
   }
 
@@ -67,7 +69,7 @@ class smokestack::libvirt (
         "set network/ip/dhcp/range/#attribute/start 192.168.129.2",
         "set network/ip/dhcp/range/#attribute/end 192.168.129.254",
       ],
-    require => File["/usr/share/augeas/lenses/libvirtnetwork.aug"],
+    require => [File["/usr/share/augeas/lenses/libvirtnetwork.aug"], Package['libvirt'], Service['libvirtd']],
     notify => Exec["recreate network"]
   }
 
