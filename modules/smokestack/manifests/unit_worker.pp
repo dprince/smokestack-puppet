@@ -1,8 +1,8 @@
 #
 # SmokeStack unit test worker
 #
-class smokestack::unit (
-) inherits smokestack::worker {
+class smokestack::unit_worker (
+) {
 
   # packages required to run unit tests
   package { ['python-devel',
