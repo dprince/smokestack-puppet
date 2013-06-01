@@ -2,7 +2,7 @@
 # Configure collectd for on a SmokeStack workers
 # NOTE: Currently uses Librato Metrics
 #
-class smokestack::collectd (
+class smokestack::librato_collectd (
   $librato_email='joe@example.com',
   $librato_api_token='1985481910fe29ab201302011054857292'
 ) {
