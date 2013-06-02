@@ -29,6 +29,7 @@ if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
 
     gem install hiera hiera-puppet
 
+    mkdir -p /etc/puppet/modules/
     ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/
 
 elif cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
