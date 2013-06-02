@@ -2,7 +2,7 @@
 # Configure collectd
 #
 class collectd (
-  $hostname='localhost',
+  $hostname=false,
   $fqdnlookup=true,
   $interval=60
 ) {

@@ -10,7 +10,9 @@
 # Global settings for the daemon.                                            #
 ##############################################################################
 
+<% if hostname %>
 Hostname      <%= hostname %>
+<% end %>
 FQDNLookup    <%= fqdnlookup %>
 #FQDNLookup   true
 #BaseDir     "/var/lib/collectd"
