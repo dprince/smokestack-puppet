@@ -1,28 +1,20 @@
 #
-# Configure collectd for on a SmokeStack workers
-# NOTE: Currently uses Librato Metrics
+# Configure collectd to use the librato plugin
 #
-class smokestack::librato_collectd (
+class collectd::plugins::librato (
   $librato_email='joe@example.com',
   $librato_api_token='1985481910fe29ab201302011054857292'
 ) {
 
-  package { 'collectd':
-    ensure => 'present'
-  }
-
-  service { "collectd":
-    ensure => 'running',
-    enable => true,
-    require => [Package['collectd'], File['/etc/collectd.d/librato.conf'], File['/opt/collectd-librato/collectd-librato.py']]
-  }
+  File['/etc/collectd.d/librato.conf'] -> Service['collectd']
+  File['/opt/collectd-librato/collectd-librato.py'] -> Service['collectd']
 
   file { "/etc/collectd.d/librato.conf":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => 640,
-    content => template('smokestack/librato.conf.erb'),
+    content => template('collectd/librato.conf.erb'),
     notify => Service['collectd'],
     require => Package['collectd'],
   }
@@ -39,7 +31,7 @@ class smokestack::librato_collectd (
     owner   => 'root',
     group   => 'root',
     mode    => 644,
-    source  => 'puppet:///modules/smokestack/collectd-librato.py',
+    source  => 'puppet:///modules/collectd/collectd-librato.py',
     require => File["/opt/collectd-librato/"]
   }
 
