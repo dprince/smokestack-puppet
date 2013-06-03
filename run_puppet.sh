@@ -10,5 +10,6 @@ MODULE_DIR=${BASE_DIR}/modules
 MODULE_PATH=${MODULE_DIR}:/etc/puppet/modules
 PUPPET_LOG=/var/log/puppet.log
 
+#export FACTER_fqdn="foo.bar"
 cd $BASE_DIR/
 /usr/bin/puppet apply -l $PUPPET_LOG --modulepath=$MODULE_PATH manifests/site.pp

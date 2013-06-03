@@ -42,3 +42,43 @@ node /^mirror.*/ inherits default {
   }
 
 }
+
+node /^xen.*/ inherits default {
+
+  class { "smokestack::worker": }
+
+  smokestack::xen_worker {'xen_worker_1':
+    worker_id => 1,
+    xenserver_ip => hiera('xenserver_ip_1'),
+  }
+
+  smokestack::xen_worker {'xen_worker_2':
+    worker_id => 2,
+    xenserver_ip => hiera('xenserver_ip_2'),
+  }
+
+  smokestack::xen_worker {'xen_worker_3':
+    worker_id => 3,
+    xenserver_ip => hiera('xenserver_ip_3'),
+  }
+
+  smokestack::xen_worker {'xen_worker_4':
+    worker_id => 4,
+    xenserver_ip => hiera('xenserver_ip_4'),
+  }
+
+}
+
+node /^libvirt.*/ inherits default {
+
+  class { 'smokestack::worker': }
+
+  smokestack::libvirt_worker {'libvirt_worker_1':
+    worker_id => 1,
+  }
+
+  smokestack::libvirt_worker {'libvirt_worker_2':
+    worker_id => 2,
+  }
+
+}
