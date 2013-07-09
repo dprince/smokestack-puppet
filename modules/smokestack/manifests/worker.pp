@@ -50,7 +50,7 @@ class smokestack::worker (
           '/u/apps/SmokeStack/shared/pids']:
     ensure  => directory,
     mode    => '775',
-    recurse => true,
+    #recurse => true,
     owner   => $username,
     group   => $username,
     require => User['smokestack']
