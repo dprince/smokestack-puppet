@@ -73,6 +73,8 @@ node /^libvirt.*/ inherits default {
 
   class { 'smokestack::worker': }
 
+  class { 'smokestack::libvirt': }
+
   smokestack::libvirt_worker {'libvirt_worker_1':
     worker_id => 1,
   }
