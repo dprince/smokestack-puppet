@@ -4,6 +4,7 @@
 class cloudcue::base (
   $username='cloudcue',
   $home_dir='/home/cloudcue',
+  $server_name_prefix='cc_',
   $cloudcue_db_name='cloudcue_prod',
   $cloudcue_db_username='cloudcue',
   $cloudcue_db_host,
@@ -75,6 +76,15 @@ class cloudcue::base (
     group   => $username,
     mode    => 640,
     content => template('cloudcue/database.yml.erb'),
+    require => File['/u/apps/CloudCue/shared/config']
+  }
+
+  file { "/u/apps/CloudCue/shared/config/environments/production.rb":
+    ensure  => present,
+    owner   => $username,
+    group   => $username,
+    mode    => 640,
+    content => template('cloudcue/production.rb.erb'),
     require => File['/u/apps/CloudCue/shared/config']
   }
 
