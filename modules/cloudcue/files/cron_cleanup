@@ -1,0 +1,1 @@
+*/15 * * * * cloudcue cd /u/apps/CloudCue/current/ && RAILS_ENV=production bundle exec ./script/rails runner ./contrib/runner_scripts/cleanup_servers.rb
