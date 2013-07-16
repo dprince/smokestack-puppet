@@ -51,6 +51,7 @@ class cloudcue::base (
           '/u/apps/CloudCue/',
           '/u/apps/CloudCue/releases',
           '/u/apps/CloudCue/shared',
+          '/u/apps/CloudCue/shared/config/environments',
           '/u/apps/CloudCue/shared/config',
           '/u/apps/CloudCue/shared/log',
           '/u/apps/CloudCue/shared/pids']:
@@ -85,7 +86,7 @@ class cloudcue::base (
     group   => $username,
     mode    => 640,
     content => template('cloudcue/production.rb.erb'),
-    require => File['/u/apps/CloudCue/shared/config']
+    require => File['/u/apps/CloudCue/shared/config/environments']
   }
 
 }
