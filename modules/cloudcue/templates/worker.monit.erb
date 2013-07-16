@@ -1,0 +1,4 @@
+check process resque_worker_<%= worker_id %>
+  with pidfile /u/apps/CloudCue/current/tmp/pids/resque_worker_<%= worker_id %>.pid
+  start program = "/bin/sh -c 'USER=<%= username %> HOME=<%= home_dir %> WORKER_ID=<%= worker_id %> RAILS_ENV=production QUEUE=* /u/apps/CloudCue/current/script/start_worker'" as uid <%= username %> and gid <%= username %>
+  stop program = "/bin/sh -c 'cd /u/apps/CloudCue/current && kill -s QUIT `cat tmp/pids/resque_worker_<%= worker_id %>.pid` && rm -f tmp/pids/resque_worker_<%= worker_id %>.pid; exit 0;'"

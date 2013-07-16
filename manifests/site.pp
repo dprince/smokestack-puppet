@@ -1,10 +1,13 @@
 node default {
 
+  class { 'ssh': }
+
   class { 'collectd': }
   class { 'collectd::plugins::librato':
     librato_email => hiera('librato_email'),
     librato_api_token => hiera('librato_api_token'),
   }
+
   class { 'packagekit::cron': }
 
 }
@@ -81,6 +84,37 @@ node /^libvirt.*/ inherits default {
 
   smokestack::libvirt_worker {'libvirt_worker_2':
     worker_id => 2,
+  }
+
+}
+
+node /^cloudcue.*/ inherits default {
+
+  class { 'cloudcue::base':
+    cloudcue_db_host => hiera('cloudcue_db_host'),
+    cloudcue_db_name => hiera('cloudcue_db_name'),
+    cloudcue_db_username => hiera('cloudcue_db_username'),
+    cloudcue_db_password => hiera('cloudcue_db_password')
+  }
+
+  cloudcue::worker {'worker_1':
+    worker_id => 1,
+  }
+
+  cloudcue::worker {'worker_2':
+    worker_id => 2,
+  }
+
+  cloudcue::worker {'worker_3':
+    worker_id => 3,
+  }
+
+  cloudcue::worker {'worker_4':
+    worker_id => 4,
+  }
+
+  cloudcue::worker {'worker_5':
+    worker_id => 5,
   }
 
 }

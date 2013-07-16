@@ -1,7 +1,7 @@
 #
-# Base SmokeStack ssh configuration
+# Base ssh configuration
 #
-class smokestack::ssh (
+class ssh::init (
 ) {
 
   # Disable ssh password access

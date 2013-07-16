@@ -1,11 +1,16 @@
 #
-# Base CloudCue worker configuration
+# Base CloudCue configuration
 #
-class cloudcue::worker (
+class cloudcue::base (
   $username='cloudcue',
+  $home_dir='/home/cloudcue',
+  $cloudcue_db_name='cloudcue_prod',
+  $cloudcue_db_username='cloudcue',
+  $cloudcue_db_host,
+  $cloudcue_db_password,
 ) {
 
-  # base packages required by all CloudCue workers
+  # base packages required by all CloudCue
   package { ['rubygems',
               'libxslt-devel',
               'libxml2-devel',
@@ -31,12 +36,21 @@ class cloudcue::worker (
     ensure => present
   }
 
+  file { $home_dir:
+    ensure  => directory,
+    mode    => '700',
+    owner   => $username,
+    group   => $username,
+    require => User[$username]
+  }
+
   # Capistrano directory tree
   file { ['/u/',
           '/u/apps/',
           '/u/apps/CloudCue/',
           '/u/apps/CloudCue/releases',
           '/u/apps/CloudCue/shared',
+          '/u/apps/CloudCue/shared/config',
           '/u/apps/CloudCue/shared/log',
           '/u/apps/CloudCue/shared/pids']:
     ensure  => directory,
@@ -53,6 +67,15 @@ class cloudcue::worker (
     changes   => [
         "clear Defaults/requiretty/negate"
       ]
+  }
+
+  file { "/u/apps/CloudCue/shared/config/database.yml":
+    ensure  => present,
+    owner   => $username,
+    group   => $username,
+    mode    => 640,
+    content => template('cloudcue/database.yml.erb'),
+    require => File['/u/apps/CloudCue/shared/config']
   }
 
 }
