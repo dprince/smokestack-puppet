@@ -90,12 +90,18 @@ node /^libvirt.*/ inherits default {
 
 node /^cloudcue.*/ inherits default {
 
+  class { 'apache': }
+
+  class { 'redis': }
+
   class { 'cloudcue::base':
     cloudcue_db_host => hiera('cloudcue_db_host'),
     cloudcue_db_name => hiera('cloudcue_db_name'),
     cloudcue_db_username => hiera('cloudcue_db_username'),
     cloudcue_db_password => hiera('cloudcue_db_password')
   }
+
+  class { 'cloudcue::cron': }
 
   cloudcue::worker {'worker_1':
     worker_id => 1,
