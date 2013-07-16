@@ -1,7 +1,7 @@
 #
 # Base ssh configuration
 #
-class ssh::init (
+class ssh (
 ) {
 
   # Disable ssh password access
