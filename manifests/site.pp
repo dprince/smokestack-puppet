@@ -90,7 +90,7 @@ node /^libvirt.*/ inherits default {
 
 node /^cloudcue.*/ inherits default {
 
-  class { 'apache': }
+  class { 'cloudcue::api': }
 
   class { 'redis': }
 
