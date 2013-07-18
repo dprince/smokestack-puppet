@@ -124,3 +124,9 @@ node /^cloudcue.*/ inherits default {
   }
 
 }
+
+node /^pkgcache.*/ inherits default {
+
+  class { 'pkgcache': }
+
+}

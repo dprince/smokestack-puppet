@@ -20,7 +20,7 @@
 # The repo and preferences files are also managed by puppet, so be sure
 # to keep them in sync with this file.
 
-if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
+if cat /etc/*release | grep -e "Fedora release 18" &> /dev/null; then
 
     yum update -y
 
@@ -31,6 +31,10 @@ if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
 
     mkdir -p /etc/puppet/modules/
     ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/
+
+elif cat /etc/*release | grep -e "Fedora" &> /dev/null; then
+
+    yum install -y redhat-lsb-core git puppet
 
 elif cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
 

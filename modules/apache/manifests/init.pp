@@ -8,7 +8,7 @@ class apache (
   service {'httpd':
     ensure  => 'running',
     enable  => true,
-    require => Package["redis"]
+    require => Package["httpd"]
   }
 
 }
