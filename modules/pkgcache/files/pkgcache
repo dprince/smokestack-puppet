@@ -73,7 +73,7 @@ def do_get():
     uuid_src =m.group(3)
 
     filenameswehad = []
-    for dt, uuid_pkg, uuid_src, filename in c.execute("SELECT * FROM pkgcache WHERE distro_name = '%s' AND uuid_pkg = '%s' AND uuid_src = '%s' ORDER BY dt DESC" % (distro_name, uuid_pkg, uuid_src)):
+    for dt, distro_name, uuid_pkg, uuid_src, filename in c.execute("SELECT * FROM pkgcache WHERE distro_name = '%s' AND uuid_pkg = '%s' AND uuid_src = '%s' ORDER BY dt DESC" % (distro_name, uuid_pkg, uuid_src)):
         if filename in filenameswehad: continue
         filenameswehad.append(filename)
         print filename
