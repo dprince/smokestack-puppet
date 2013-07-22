@@ -43,7 +43,7 @@ def do_post():
     filename = form["file"].filename
 
     # strip out any "/"
-    relativefilename = os.path.join(uuid_src[:2], filename.split("/")[-1])
+    relativefilename = os.path.join(distro_name, uuid_src[:2], filename.split("/")[-1])
     absolutefilename = os.path.join(storagedir, relativefilename)
 
     if not os.path.exists(os.path.split(absolutefilename)[0]):
