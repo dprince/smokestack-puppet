@@ -1,7 +1,7 @@
 #
 # Base SmokeStack base configuration
 #
-class smokestack::worker (
+class smokestack::base (
   $home_dir='/home/smokestack',
   $username='smokestack',
   $kytoon_libvirt_use_sudo='False',

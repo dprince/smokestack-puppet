@@ -12,6 +12,24 @@ node default {
 
 }
 
+node /^api.*/ inherits default {
+
+  class { 'smokestack::api': }
+
+  class { 'redis': }
+
+
+  class { 'smokestack::base':
+    smokestack_db_host => hiera('smokestack_db_host'),
+    smokestack_db_name => hiera('smokestack_db_name'),
+    smokestack_db_username => hiera('smokestack_db_username'),
+    smokestack_db_password => hiera('smokestack_db_password'),
+    redis_server => hiera('redis_server'),
+    package_cache_server => hiera('package_cache_server')
+  }
+
+}
+
 node /^mirror.*/ inherits default {
 
   class { 'smokestack::yum::mirror': }
@@ -48,7 +66,7 @@ node /^mirror.*/ inherits default {
 
 node /^xen.*/ inherits default {
 
-  class { "smokestack::worker": }
+  class { "smokestack::base": }
 
   smokestack::xen_worker {'xen_worker_1':
     worker_id => 1,
@@ -74,7 +92,7 @@ node /^xen.*/ inherits default {
 
 node /^libvirt.*/ inherits default {
 
-  class { 'smokestack::worker': }
+  class { 'smokestack::base': }
 
   class { 'smokestack::libvirt': }
 
@@ -90,7 +108,7 @@ node /^libvirt.*/ inherits default {
 
 node /^cloud-worker.*/ inherits default {
 
-  class { 'smokestack::worker':
+  class { 'smokestack::base':
     kytoon_cloudcue_url => hiera('kytoon_cloudcue_url'),
     kytoon_cloudcue_username => hiera('kytoon_cloudcue_username'),
     kytoon_cloudcue_password => hiera('kytoon_cloudcue_password'),
