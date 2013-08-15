@@ -66,7 +66,14 @@ node /^mirror.*/ inherits default {
 
 node /^xen.*/ inherits default {
 
-  class { "smokestack::base": }
+  class { 'smokestack::base':
+    smokestack_db_host => hiera('smokestack_db_host'),
+    smokestack_db_name => hiera('smokestack_db_name'),
+    smokestack_db_username => hiera('smokestack_db_username'),
+    smokestack_db_password => hiera('smokestack_db_password'),
+    redis_server => hiera('redis_server'),
+    package_cache_server => hiera('package_cache_server')
+  }
 
   smokestack::xen_worker {'xen_worker_1':
     worker_id => 1,
@@ -92,7 +99,14 @@ node /^xen.*/ inherits default {
 
 node /^libvirt.*/ inherits default {
 
-  class { 'smokestack::base': }
+  class { 'smokestack::base':
+    smokestack_db_host => hiera('smokestack_db_host'),
+    smokestack_db_name => hiera('smokestack_db_name'),
+    smokestack_db_username => hiera('smokestack_db_username'),
+    smokestack_db_password => hiera('smokestack_db_password'),
+    redis_server => hiera('redis_server'),
+    package_cache_server => hiera('package_cache_server')
+  }
 
   class { 'smokestack::libvirt': }
 
