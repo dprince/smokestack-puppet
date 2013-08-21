@@ -137,6 +137,33 @@ node /^cloud-worker.*/ inherits default {
   smokestack::cloud_worker {'cloud_worker_1':
     worker_id => 1,
   }
+  smokestack::cloud_worker {'cloud_worker_2':
+    worker_id => 2,
+  }
+  smokestack::cloud_worker {'cloud_worker_3':
+    worker_id => 3,
+  }
+  smokestack::cloud_worker {'cloud_worker_4':
+    worker_id => 4,
+  }
+  smokestack::cloud_worker {'cloud_worker_5':
+    worker_id => 5,
+  }
+  smokestack::cloud_worker {'cloud_worker_6':
+    worker_id => 6,
+  }
+  smokestack::cloud_worker {'cloud_worker_7':
+    worker_id => 7,
+  }
+  smokestack::cloud_worker {'cloud_worker_8':
+    worker_id => 8,
+  }
+  smokestack::cloud_worker {'cloud_worker_9':
+    worker_id => 9,
+  }
+  smokestack::cloud_worker {'cloud_worker_10':
+    worker_id => 10,
+  }
 
 }
 
@@ -158,21 +185,29 @@ node /^cloudcue.*/ inherits default {
   cloudcue::worker {'worker_1':
     worker_id => 1,
   }
-
   cloudcue::worker {'worker_2':
     worker_id => 2,
   }
-
   cloudcue::worker {'worker_3':
     worker_id => 3,
   }
-
   cloudcue::worker {'worker_4':
     worker_id => 4,
   }
-
   cloudcue::worker {'worker_5':
     worker_id => 5,
+  }
+  cloudcue::worker {'worker_6':
+    worker_id => 6,
+  }
+  cloudcue::worker {'worker_7':
+    worker_id => 7,
+  }
+  cloudcue::worker {'worker_8':
+    worker_id => 8,
+  }
+  cloudcue::worker {'worker_9':
+    worker_id => 9,
   }
 
 }
