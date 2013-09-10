@@ -95,6 +95,11 @@ node /^xen.*/ inherits default {
     xenserver_ip => hiera('xenserver_ip_4'),
   }
 
+  class { 'smokestack::metrics':
+    librato_email => hiera('librato_email'),
+    librato_api_token => hiera('librato_api_token'),
+  }
+
 }
 
 node /^libvirt.*/ inherits default {
@@ -116,6 +121,11 @@ node /^libvirt.*/ inherits default {
 
   smokestack::libvirt_worker {'libvirt_worker_2':
     worker_id => 2,
+  }
+
+  class { 'smokestack::metrics':
+    librato_email => hiera('librato_email'),
+    librato_api_token => hiera('librato_api_token'),
   }
 
 }
@@ -163,6 +173,11 @@ node /^cloud-worker.*/ inherits default {
   }
   smokestack::cloud_worker {'cloud_worker_10':
     worker_id => 10,
+  }
+
+  class { 'smokestack::metrics':
+    librato_email => hiera('librato_email'),
+    librato_api_token => hiera('librato_api_token'),
   }
 
 }
