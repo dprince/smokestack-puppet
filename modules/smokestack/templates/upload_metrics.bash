@@ -3,7 +3,7 @@
 
 METRICS_FILE="/tmp/smokestack_metrics.txt"
 TMP_METRICS_FILE="/tmp/smokestack_metrics.processing"
-FULL_METRICS_BACKUP="/root/metrics_full_backup.txt"
+FULL_METRICS_BACKUP="$HOME/metrics_full_backup.txt"
 
 if [ -f "$METRICS_FILE" ]; then
 
