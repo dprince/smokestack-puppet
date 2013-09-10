@@ -5,7 +5,7 @@
 #
 class smokestack::metrics (
   $librato_email,
-  $librato_api_key,
+  $librato_api_token,
   $username='smokestack',
   $home_dir='/home/smokestack'
 ) {
